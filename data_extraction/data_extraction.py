@@ -20,6 +20,8 @@ def get_files_names(path: str) -> List[str]:
     :return: A list containing the names of all the files in the directory and its subdirectories
     """
     files_list = []
+    if os.path.isfile(path):
+        return [path]
     for root, dirs, files in os.walk(path):
         files_list += [os.path.join(root, file) for file in files]
     return files_list
