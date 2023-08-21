@@ -1,5 +1,5 @@
 import os
-import string
+from re import findall
 
 words_dict = {}
 
@@ -10,13 +10,13 @@ def remove_punctuation(input_string: str) -> str:
     :param input_string: The string to remove punctuation from
     :return: The string without punctuation
     """
-    translator = str.maketrans('', '', string.punctuation)
-    return input_string.translate(translator)
+    output_string = findall('[A-Za-z0-9\t\s\n]', input_string)
+    return ''.join(output_string)
 
 
 def extract_data(path: str) -> None:
     """
-    Extracts data from a files in nested directories to a database (dictionary)
+    Extracts data from files in nested directories to a database (dictionary)
     :param path: The path to the file or directory
     """
     if os.path.isfile(path):
@@ -35,8 +35,3 @@ def extract_data(path: str) -> None:
     elif os.path.isdir(path):
         for entry in os.listdir(path):
             extract_data(os.path.join(path, entry))
-
-
-if __name__ == '__main__':
-    extract_data(r'C:\Users\josh5\Excelenteem\Python_Works_1.0\google_project\Archive')
-    print(*list(zip(words_dict.keys(), words_dict.values())), sep='\n')
