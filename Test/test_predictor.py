@@ -2,7 +2,7 @@
 
 # Mock data ..
 
-word_occurrences = {
+word_dict = {
     'I': {
         ('file1.txt', 3): [0],
         ('file2.txt', 3): [0],
@@ -32,7 +32,11 @@ word_occurrences = {
     },
     'stay.': {
         ('file3.txt', 2): [4]
+    },
+    'Python': {
+        ('file1.txt', 3): [4],
     }
+
 }
 
 
@@ -42,5 +46,5 @@ def predict_file_line(word_occurrences, phrase):
 
 def test_predict_file_line():
     phrase = "I want to"
-    predicted_locations = predict_file_line(word_occurrences, phrase)
+    predicted_locations = predict_file_line(word_dict, phrase)
     assert set(predicted_locations) == {('file1.txt', 3), ('file2.txt', 3)}
