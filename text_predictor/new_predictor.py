@@ -1,4 +1,15 @@
 from Test.test_predictor import word_dict
+from data_extraction.extract_data_to_dictionary import extract_data
+from data_to_obj import convert_to_autocomplete_data
+
+import os
+from dotenv import load_dotenv
+
+root = os.getenv("ROOT_PATH")
+
+if not root:
+    load_dotenv()
+    root = os.getenv("ROOT_PATH")
 
 
 def find_sentence_locations(word_dict, sentence):
@@ -15,6 +26,8 @@ def find_sentence_locations(word_dict, sentence):
             if all(word in word_dict and file_line in word_dict[word] and index + i in word_dict[word][file_line]
                    for i, word in enumerate(words[1:], 1)):
                 matched_locations.append(file_line)
+                if len(matched_locations) >= 5:
+                    return matched_locations
 
     return matched_locations
 
@@ -52,13 +65,12 @@ def generate_sentences(sentence):
                 new_sentence = sentence[:i] + char + sentence[i:]
                 score = add_or_delete_score(i)
                 results.append((new_sentence, score))
-    # print(results)
-    # results = results.remove(sentence)
+
     return results
 
 
 def get_sentences_and_scores(input_sentence, word_dict):
-    input_len = len(input_sentence.replace(" ", ""))
+    input_len = len(input_sentence)
     found_sentences = find_sentence_locations(word_dict, input_sentence)
 
     result = [(s, 2 * input_len) for s in found_sentences]
@@ -75,7 +87,7 @@ def get_sentences_and_scores(input_sentence, word_dict):
             for s in found_for_generated:
                 if s not in added_sentences:
                     if len(result) < 5:
-                        score = 2 * input_len + gen_score
+                        score = 2 * input_len + gen_score  # todo its not always  ...
                         result.append((s, score))
                         added_sentences.add(s)
                     else:
@@ -86,7 +98,18 @@ def get_sentences_and_scores(input_sentence, word_dict):
     return result
 
 
+def get_suggestions(dict, sentence):
+    res_as_list = get_sentences_and_scores(sentence, dict)
+    list_dto = convert_to_autocomplete_data(res_as_list)
+    return list_dto
 
-if __name__ == '__main__':
-    original_sentence = "I want"
-    print(get_sentences_and_scores(original_sentence,word_dict))
+
+
+
+
+
+
+
+
+
+
