@@ -11,7 +11,14 @@ if not root:
     root = os.getenv("ROOT_PATH")
 
 
-def just_uppercase(input_str):
+def just_uppercase(input_str: str) -> str:
+    '''
+
+    :param input_str: String with lowercase and uppercase letters, with non-letter characters, and with some whitespaces
+                        between two words.
+    :return: The same string with uppercase letters, without the non-letters characters, and with one whitespac between
+                        the words in the string.
+    '''
     upper_str = ''
     for char in input_str:
         if char.isalpha() or char == ' ':
@@ -34,11 +41,11 @@ def main():
         while user_input != '#' and user_input != '*':
             all_user_inputs += user_input
             upper_input = just_uppercase(all_user_inputs)
-            answer = get_suggestions(data_structure, upper_input)
-            if len(answer) > 0:
-                print(f'Here are {len(answer)} suggestions:')
-                for i in range(len(answer)):
-                    print(f'{i+1}. {answer[i].completed_sentence} ({answer[i].source_text} {answer[i].offset})')
+            suggestions = get_suggestions(data_structure, upper_input)
+            if len(suggestions) > 0:
+                print(f'Here are {len(suggestions)} suggestions:')
+                for i in range(len(suggestions)):
+                    print(f'{i+1}. {suggestions[i].completed_sentence} ({suggestions[i].source_text} {suggestions[i].offset})')
             else:
                 print('There are no suggestions')
             user_input = input(f"{all_user_inputs}")
