@@ -1,0 +1,4 @@
+The sun is shining.
+Birds chirp in the morning.
+I want to learn Python.
+Rainbows appear after rain.
