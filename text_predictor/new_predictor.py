@@ -1,6 +1,6 @@
 from Test.test_predictor import word_dict
 from data_extraction.extract_data_to_dictionary import extract_data
-from data_to_obj import convert_to_autocomplete_data
+from text_predictor.data_to_obj import convert_to_autocomplete_data
 
 import os
 from dotenv import load_dotenv
@@ -98,8 +98,8 @@ def get_sentences_and_scores(input_sentence, word_dict):
     return result
 
 
-def get_suggestions(dict, sentence):
-    res_as_list = get_sentences_and_scores(sentence, dict)
+def get_suggestions(data_structure, sentence):
+    res_as_list = get_sentences_and_scores(sentence, data_structure)
     list_dto = convert_to_autocomplete_data(res_as_list)
     return list_dto
 
