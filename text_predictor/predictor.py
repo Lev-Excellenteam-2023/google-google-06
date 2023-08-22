@@ -30,10 +30,12 @@ def find_sentence(sentence):
     if not words:
         return []
 
-
     current_sentences = {}
     # find the first word that  exist in db
+
     index_of_first_word = 0
+    find_error = False
+
     for idx,word in enumerate(words):
         current_sentences = word_dict.get(word,{})
         if current_sentences != {}:
@@ -51,5 +53,5 @@ def find_sentence(sentence):
     return total_scores
 
 
-sentence = "dont he  want to learn Python today "
+sentence = "dont he  want to"
 print(find_sentence(sentence))
