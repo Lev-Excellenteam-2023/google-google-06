@@ -3,7 +3,7 @@ def get_specific_line(path: str, line_num: int) -> str:
     Finds the sentence in a file in a specific line
     :param path: The path to the file
     :param line_num: The line number
-    :return: The sentence in the line
+    :return: The sentence in the line number or an empty string if the line number is greater than the number of lines
     """
     with open(path, 'r', errors='ignore') as data_file:
         lines = data_file.readlines()
