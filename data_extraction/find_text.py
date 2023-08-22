@@ -6,7 +6,6 @@ def get_specific_line(path: str, line_num: int) -> str:
     :return: The sentence in the line
     """
     with open(path, 'r', errors='ignore') as data_file:
-        for i, line in enumerate(data_file):
-            if i == line_num:
-                return line
-    return ''
+        lines = data_file.readlines()
+
+    return lines[line_num] if line_num < len(lines) else ''
