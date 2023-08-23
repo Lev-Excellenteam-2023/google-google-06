@@ -16,12 +16,12 @@
   - **Sentence Correction**: If there are no 5 results in *`Sentence Completion`* we build a list of the all option of mistakes (miss a letter, aditional a letter or replace letter) and searching for results by *`Sentence Completion`* and scoring each result.
   - **Scoring**:
     The basic score equals to twice length of the input (not include spatial chars like @$,.! ...). *e.g.* The score for input *this is* is 14.
-    If need to fix the input the score is
-    - Change the 1st char -5
-    - Change the 2nd char -4
-    - Change the 3rd char -3
-    - Change the 4th char -2
-    - Change the 5th char or later -1
+    If need to fix the input the score is:
+      - Change the 1st char -5
+      - Change the 2nd char -4
+      - Change the 3rd char -3
+      - Change the 4th char -2
+      - Change the 5th char or later -1
    
     - Delete or add char
       - 1st char -10
